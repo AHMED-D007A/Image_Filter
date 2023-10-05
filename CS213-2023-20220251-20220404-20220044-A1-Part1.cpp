@@ -7,7 +7,7 @@ using namespace std;
 
 /* functions declaration */
 void Ahlan();
-int check_file_name();
+int check_file_name(string file_name);
 
 //================================================================================================================================//
 
@@ -18,9 +18,9 @@ int check_file_name();
 int main(void)
 {
 	string file_name;
-	cin >> file_name;
 
 	Ahlan();
+	cin >> file_name;
 	int check_FN = check_file_name(file_name);
 
 	if (!check_FN)
@@ -35,6 +35,7 @@ int main(void)
 void Ahlan(void)
 {
 	cout << "Ahlan ya user ya habibi \1\n";
+	cout << "Please enter file name of the image to process: ";
 }
 
 /**
@@ -44,10 +45,15 @@ void Ahlan(void)
  */
 int check_file_name(string file_name)
 {
-	cout << "Please enter file name of the image to process:";
 	FILE *file;
 
-	if (!(file = fopen(file_name + ".bmp", "rb")))
+	char c[file_name.length()];
+	for (int i = 0; i < file_name.length(); i++)
+	{
+		c[i] = file_name[i];
+	}
+
+	if (!(file = fopen(strcat(c, ".bmp"), "rb")))
 	{
 		return (0);
 	}
