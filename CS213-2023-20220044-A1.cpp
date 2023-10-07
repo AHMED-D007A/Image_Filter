@@ -20,3 +20,27 @@ void merge_func()
 		}
 	}
 }
+
+void darken_lighten_func()
+{
+	char chara;
+
+	cout << "Do you want to (d)arken or (l)ighten?\n";
+	cin >> chara;
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			if (chara == 'l')
+			{
+				if (image[i][j] + (image[i][j] / 2) > 255)
+					image[i][j] = 255;
+				else
+					image[i][j] = image[i][j] + (image[i][j] / 2);
+			}
+			else if (chara == 'd')
+				image[i][j] = image[i][j] - (image[i][j] / 2);
+		}
+	}
+}

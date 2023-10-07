@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
-#include "bmplib.cpp"
+//#include "bmplib.cpp"
 
-#include "CS213-2023-20220044-A1.cpp"
 
 using namespace std;
 
 //==================================================================================================================================//
 
-unsigned char image[SIZE][SIZE];
+unsigned char image[256][256];
+#include "CS213-2023-20220044-A1.cpp"
 
 /* functions declaration */
 void loadImage(string file_name);
@@ -56,7 +56,7 @@ int main(void)
 			/* code */
 			break;
 		case '5':
-			/* code */
+			darken_lighten_func();
 			break;
 		case '6':
 			/* code */
