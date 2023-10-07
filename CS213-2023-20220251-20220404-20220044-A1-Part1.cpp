@@ -7,14 +7,14 @@ using namespace std;
 
 //==================================================================================================================================//
 
+unsigned char image[SIZE][SIZE];
+
 /* functions declaration */
 void loadImage(string file_name);
 void saveImage();
 void Ahlan();
 void show_menu();
 bool check_file_name(string file_name);
-
-unsigned char image[SIZE][SIZE];
 
 //==================================================================================================================================//
 
@@ -50,7 +50,7 @@ int main(void)
 			/* code */
 			break;
 		case '3':
-			/* code */
+			merge_func();
 			break;
 		case '4':
 			/* code */
