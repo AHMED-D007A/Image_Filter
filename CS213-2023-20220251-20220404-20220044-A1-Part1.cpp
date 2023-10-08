@@ -17,7 +17,7 @@ using namespace std;
 
 //==================================================================================================================================//
 
-unsigned char image[256][256];
+unsigned char image[SIZE][SIZE];
 #include "CS213-2023-20220044-A1.cpp"
 #include "CS213-2023-20220404-A1.cpp"
 #include "CS213-2023-20220251-A1.cpp"
@@ -57,7 +57,7 @@ int main(void)
 		switch (selection)
 		{
 		case '1':
-			/* code */
+			black_and_white_func();
 			break;
 		case '2':
 			invert_func();
@@ -66,7 +66,7 @@ int main(void)
 			merge_func();
 			break;
 		case '4':
-			/* code */
+			flip_func();
 			break;
 		case '5':
 			darken_lighten_func();
