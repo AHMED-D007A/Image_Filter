@@ -11,7 +11,6 @@ void flip_func()
 				image[i][j] = image[i][255 - j];
 				image[i][255 - j] = t;
 			}
-
 	else if (type == 2)
 	{
 		for (int i = 0; i < SIZE / 2; i++)
