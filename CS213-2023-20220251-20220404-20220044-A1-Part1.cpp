@@ -69,7 +69,7 @@ int main(void)
 			/* code */
 			break;
 		case '9':
-			/* code */
+			shrink_func();
 			break;
 		case 'a':
 			/* code */
