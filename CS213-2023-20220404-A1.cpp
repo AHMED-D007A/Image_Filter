@@ -12,7 +12,7 @@ void rotate_func()
 {
 	unsigned char rotatedImage[SIZE][SIZE];
 	int r;
-    cout << "Rotate (90), (180) or (360) degrees?\n";
+    cout << "Rotate (90), (180) or (270) degrees?\n";
     cin >> r;
     switch (r)
     {
