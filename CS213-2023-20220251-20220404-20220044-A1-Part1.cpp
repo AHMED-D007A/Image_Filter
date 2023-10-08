@@ -1,3 +1,14 @@
+// FCAI – OOP Programming – 2023 - Assignment 1
+// Program Name:				CS213-2023-20220251-20220404-20220044-A1-Part1.cpp
+// Last Modification Date:	9/10/2023
+// Author1 and ID and Group:	Kareem Yossry 20220251
+// Author2 and ID and Group:	Youssef Mohamed Saleh 20220404
+// Author3 and ID and Group:	Ahmed Mamdouh Mohamed 20220044
+// Teaching Assistant:		N/A
+// Purpose: Image Filter processing program for gray scale images.
+
+//==================================================================================================================================//
+
 #include <bits/stdc++.h>
 #include "bmplib.cpp"
 
@@ -9,6 +20,7 @@ using namespace std;
 unsigned char image[256][256];
 #include "CS213-2023-20220044-A1.cpp"
 #include "CS213-2023-20220404-A1.cpp"
+#include "CS213-2023-20220251-A1.cpp"
 
 /* functions declaration */
 void loadImage(string file_name);
