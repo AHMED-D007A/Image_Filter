@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-#include "bmplib.cpp"
-
 void merge_func()
 {
 	string file_name;
