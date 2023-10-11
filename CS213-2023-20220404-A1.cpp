@@ -55,7 +55,7 @@ void rotate_func()
 void enlarge_func()
 {
     unsigned char enlargedImage[SIZE][SIZE];
-    int q;
+    char q;
     cout << "Which quarter to enlarge 1, 2, 3 or 4?\n";
     cin >> q;
     switch (q)
