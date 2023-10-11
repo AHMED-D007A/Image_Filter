@@ -155,3 +155,47 @@ void shuffle_func()
         }
       }
 }
+void skew_right_func()
+{
+  unsigned char shrinkedImage[SIZE][2*SIZE];
+  unsigned char skewedImage[SIZE][SIZE];
+  for (int i = 0; i < SIZE; i++)
+    {
+      for (int j = 0; j < SIZE; j++)
+      {
+        skewedImage[i][j] = 255;
+      }
+    }
+  float degree;
+  cout << "Please enter degree to skew right: ";
+  cin >> degree;
+  float removed = tan(degree * M_PI / 180) * SIZE;
+  float scale = (SIZE - removed) / SIZE;
+  int average;
+  for (int i = 0; i < SIZE; i++)
+      {
+        for (int j = 0; j < int(SIZE - removed); j++)
+        {
+          // average = 0;
+          // for (int x = 0; x < int(1/scale); x++)
+          //   average += image[i][int(j/scale)+x];
+          // shrinkedImage[i][j] = average;
+          
+          shrinkedImage[i][j] = image[i][int(j/scale)];
+        }
+      }
+  for (int i = 0; i < SIZE; i++)
+      {
+        for (int j = 0; j < int(SIZE - removed); j++)
+        {
+          skewedImage[i][j+(int)(removed*((255-i)/255.0f))] = shrinkedImage[i][j];
+        }
+      }
+  for (int i = 0; i < SIZE; i++)
+      {
+        for (int j = 0; j < SIZE; j++)
+        {
+          image[i][j] = skewedImage[i][j];
+        }
+      }
+}

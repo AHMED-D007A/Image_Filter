@@ -96,7 +96,7 @@ int main(void)
 			/* code */
 			break;
 		case 'e':
-			/* code */
+			skew_right_func();
 			break;
 		case 'f':
 			/* code */
