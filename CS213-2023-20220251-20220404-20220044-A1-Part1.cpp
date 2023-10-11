@@ -78,7 +78,7 @@ int main(void)
 			/* code */
 			break;
 		case '8':
-			/* code */
+			enlarge_func();
 			break;
 		case '9':
 			/* code */
@@ -87,7 +87,7 @@ int main(void)
 			/* code */
 			break;
 		case 'b':
-			/* code */
+			shuffle_func();
 			break;
 		case 'c':
 			/* code */
