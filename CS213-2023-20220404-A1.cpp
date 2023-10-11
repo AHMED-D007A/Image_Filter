@@ -65,10 +65,9 @@ void enlarge_func()
       {
         for (int j = 0; j < SIZE/2; j++)
         {
-          enlargedImage[2*i][2*j] = image[i][j];
-          enlargedImage[2*i+1][2*j] = image[i][j];
-          enlargedImage[2*i][2*j+1] = image[i][j];
-          enlargedImage[2*i+1][2*j+1] = image[i][j];
+          for (int k = 0; k < 2; k++)
+            for (int l = 0; l < 2; l++)
+              enlargedImage[2*i+k][2*j+l] = image[i][j];
         }
       }
       break;
@@ -77,10 +76,9 @@ void enlarge_func()
       {
         for (int j = 0; j < SIZE/2; j++)
         {
-          enlargedImage[2*i][2*j] = image[i][j+SIZE/2];
-          enlargedImage[2*i+1][2*j] = image[i][j+SIZE/2];
-          enlargedImage[2*i][2*j+1] = image[i][j+SIZE/2];
-          enlargedImage[2*i+1][2*j+1] = image[i][j+SIZE/2];
+          for (int k = 0; k < 2; k++)
+            for (int l = 0; l < 2; l++)
+              enlargedImage[2*i+k][2*j+l] = image[i][j+SIZE/2];
         }
       }
       break;
@@ -89,10 +87,9 @@ void enlarge_func()
       {
         for (int j = 0; j < SIZE/2; j++)
         {
-          enlargedImage[2*i][2*j] = image[i+SIZE/2][j];
-          enlargedImage[2*i+1][2*j] = image[i+SIZE/2][j];
-          enlargedImage[2*i][2*j+1] = image[i+SIZE/2][j];
-          enlargedImage[2*i+1][2*j+1] = image[i+SIZE/2][j];
+          for (int k = 0; k < 2; k++)
+            for (int l = 0; l < 2; l++)
+              enlargedImage[2*i+k][2*j+l] = image[i+SIZE/2][j];
         }
       }
       break;
@@ -101,10 +98,9 @@ void enlarge_func()
       {
         for (int j = 0; j < SIZE/2; j++)
         {
-          enlargedImage[2*i][2*j] = image[i+SIZE/2][j+SIZE/2];
-          enlargedImage[2*i+1][2*j] = image[i+SIZE/2][j+SIZE/2];
-          enlargedImage[2*i][2*j+1] = image[i+SIZE/2][j+SIZE/2];
-          enlargedImage[2*i+1][2*j+1] = image[i+SIZE/2][j+SIZE/2];
+          for (int k = 0; k < 2; k++)
+            for (int l = 0; l < 2; l++)
+              enlargedImage[2*i+k][2*j+l] = image[i+SIZE/2][j+SIZE/2];
         }
       }
       break;
