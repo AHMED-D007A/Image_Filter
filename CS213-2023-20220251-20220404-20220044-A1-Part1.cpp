@@ -90,7 +90,7 @@ int main(void)
 			/* code */
 			break;
 		case 'c':
-			/* code */
+			blur_func();
 			break;
 		case 'd':
 			/* code */
@@ -99,7 +99,7 @@ int main(void)
 			/* code */
 			break;
 		case 'f':
-			/* code */
+			skew_vertical();
 			break;
 		case 's':
 			saveImage();
