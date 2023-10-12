@@ -78,7 +78,7 @@ int main(void)
 			/* code */
 			break;
 		case '8':
-			/* code */
+			enlarge_func();
 			break;
 		case '9':
 			shrink_func();
@@ -87,7 +87,7 @@ int main(void)
 			/* code */
 			break;
 		case 'b':
-			/* code */
+			shuffle_func();
 			break;
 		case 'c':
 			blur_func();
@@ -96,7 +96,7 @@ int main(void)
 			/* code */
 			break;
 		case 'e':
-			/* code */
+			skew_right_func();
 			break;
 		case 'f':
 			skew_vertical();
