@@ -12,7 +12,6 @@
 #include <bits/stdc++.h>
 #include "bmplib.cpp"
 
-
 using namespace std;
 
 //==================================================================================================================================//
@@ -99,7 +98,7 @@ int main(void)
 			skew_right_func();
 			break;
 		case 'f':
-			skew_vertical();
+			skew_right_func();
 			break;
 		case 's':
 			saveImage();
@@ -117,11 +116,18 @@ int main(void)
 
 //==================================================================================================================================//
 
+/**
+ * loadImage - a func that takes the image name that want to be opened.
+ * @file_name: the name of the file to be opened.
+ */
 void loadImage(string file_name)
 {
 	readGSBMP(file_name.c_str(), image);
 }
 
+/**
+ * saveImage - save the modifications in a new image file with a given name.
+ */
 void saveImage()
 {
 	char imageFileName[100];
@@ -146,27 +152,27 @@ void Ahlan()
 
 /**
  * show_menu - display a list of choices to choose a filter to apply.
-*/
+ */
 void show_menu()
 {
-cout << "Please select a filter to apply or 0 to exit:"
-	 << "\n1-Black & White Filter"
-	 << "\n2-Invert Filter"
-	 << "\n3-Merge Filter"
-	 << "\n4-Flip Image"
-	 << "\n5-Darken and Lighten Image"
-	 << "\n6-Rotate Image"
-	 << "\n7-Detect Image Edges"
-	 << "\n8-Enlarge Image"
-	 << "\n9-Shrink Image"
-	 << "\na-Mirror 1/2 Image"
-	 << "\nb-Shuffle Image"
-	 << "\nc-Blur Image"
-	 << "\nd-Crop Image"
-	 << "\ne-Skew Image Right"
-	 << "\nf-Skew Image Up"
-	 << "\ns-Save the image to a file"
-	 << "\n0-Exit\n";
+	cout << "Please select a filter to apply or 0 to exit:"
+		 << "\n1-Black & White Filter"
+		 << "\n2-Invert Filter"
+		 << "\n3-Merge Filter"
+		 << "\n4-Flip Image"
+		 << "\n5-Darken and Lighten Image"
+		 << "\n6-Rotate Image"
+		 << "\n7-Detect Image Edges"
+		 << "\n8-Enlarge Image"
+		 << "\n9-Shrink Image"
+		 << "\na-Mirror 1/2 Image"
+		 << "\nb-Shuffle Image"
+		 << "\nc-Blur Image"
+		 << "\nd-Crop Image"
+		 << "\ne-Skew Image Right"
+		 << "\nf-Skew Image Up"
+		 << "\ns-Save the image to a file"
+		 << "\n0-Exit\n";
 }
 
 /**
@@ -184,6 +190,8 @@ bool check_file_name(string file_name)
 		return (0);
 	}
 
-	cout << "Cannot open file: " << file_name <<endl;
+	cout << "Cannot open file: " << file_name << endl;
 	return (1);
 }
+
+//==================================================================================================================================//

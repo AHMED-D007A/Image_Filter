@@ -29,10 +29,10 @@ void black_and_white_func()
 	{
 		for (int j = 0; j < SIZE; j++)
 		{
-		if (image[i][j] > 127)
-			image[i][j] = 255;
-		else
-			image[i][j] = 0;
+			if (image[i][j] > 127)
+				image[i][j] = 255;
+			else
+				image[i][j] = 0;
 		}
 	}
 }

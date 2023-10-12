@@ -178,7 +178,7 @@ void blur_func()
 	}
 }
 
-void skew_vertical()
+void skew_up_func()
 {
 	cout << "Please enter degree to skew Up: ";
 	double degree;
