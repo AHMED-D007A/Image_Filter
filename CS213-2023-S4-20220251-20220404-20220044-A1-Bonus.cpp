@@ -1,6 +1,6 @@
 // FCAI – OOP Programming – 2023 - Assignment 1
-// Program Name:				CS213-2023-20220251-20220404-20220044-A1-Bonus.cpp
-// Last Modification Date:	9/10/2023
+// Program Name:				CS213-2023-S4-20220251-20220404-20220044-A1-Bonus.cpp
+// Last Modification Date:	16/10/2023
 // Author1 and ID and Group:	Kareem Yossry 20220251
 // Author2 and ID and Group:	Youssef Mohamed Saleh 20220404
 // Author3 and ID and Group:	Ahmed Mamdouh Mohamed 20220044
@@ -26,6 +26,7 @@ void show_menu();
 bool check_file_name(string file_name);
 
 /* filters 1, 4, 7, a and d */
+void crop_func_rgb()
 
 /* filters 2, 5, 8, b and e */
 void invert_func_rgb();
@@ -101,6 +102,7 @@ int main(void)
 			blur_func_rgb();
 			break;
 		case 'd':
+		crop_func_rgb();
 			break;
 		case 'e':
 			skew_right_func_rgb();
@@ -322,6 +324,29 @@ void darken_lighten_func_rgb()
 		}
 	}
 }
+
+void detecte_func_rgb()
+{
+
+    for (int i = 0; i < SIZE; i++)
+
+        for (int j = 0; j < SIZE; j++)
+
+            for (int k = 0; k < RGB; k++)
+            {
+
+                if (abs(image[i][j][k] - image[i + 1][j][k]) > 35 || abs(image[i][j][k] - image[i][j + 1][k]) > 35)
+                {
+                    image[i][j][k] = 0;
+                }
+
+                else
+                {
+                    image[i][j][k] = 255;
+                }
+            }
+}
+
 
 void enlarge_func_rgb()
 {
@@ -619,6 +644,43 @@ void blur_func_rgb()
 		}
 	}
 }
+
+void crop_func_rgb() 
+{   unsigned char cropimage[SIZE][SIZE][RGB];
+
+  for (int i = 0; i < SIZE; i++) 
+    for (int j = 0; j< SIZE; j++)  
+    for (int k = 0; k< RGB; k++) 
+
+      cropimage[i][j][k] = 255; 
+      int x,y,l,w;
+      cout<<"entre starting position in x,y: ";
+      cin>>x>>y;
+      cout<<"entre lenghth and width: ";
+      cin>>l>>w;
+      for (int i = x; i < x+l ; i++)
+      {
+        for (int j = y; j < y+w; j++)
+            for (int K = 0; K < RGB; K++)
+
+      {
+        cropimage[i][j][K] = image[i][j][K];
+      }
+      }
+      for (int i = 0; i < SIZE; i++)
+      {
+        for (int j = 0; j < SIZE; j++)
+         for (int K = 0; K < RGB; K++)
+
+
+      {
+           image[i][j][K]= cropimage[i][j][K];
+      }
+        
+    }
+        
+}
+     
 
 void skew_right_func_rgb()
 {

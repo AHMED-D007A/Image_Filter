@@ -1,6 +1,6 @@
 // FCAI – OOP Programming – 2023 - Assignment 1
-// Program Name:				CS213-2023-20220251-20220404-20220044-A1-FULL.cpp
-// Last Modification Date:	9/10/2023
+// Program Name:				CS213-2023-S4-20220251-20220404-20220044-A1-FULL.cpp
+// Last Modification Date:	16/10/2023
 // Author1 and ID and Group:	Kareem Yossry 20220251
 // Author2 and ID and Group:	Youssef Mohamed Saleh 20220404
 // Author3 and ID and Group:	Ahmed Mamdouh Mohamed 20220044
@@ -74,7 +74,7 @@ int main(void)
 			rotate_func();
 			break;
 		case '7':
-			/* code */
+		detect_func();
 			break;
 		case '8':
 			enlarge_func();
@@ -83,7 +83,7 @@ int main(void)
 			shrink_func();
 			break;
 		case 'a':
-			/* code */
+			mirror_func();
 			break;
 		case 'b':
 			shuffle_func();
@@ -92,13 +92,13 @@ int main(void)
 			blur_func();
 			break;
 		case 'd':
-			/* code */
+			crop_func();
 			break;
 		case 'e':
 			skew_right_func();
 			break;
 		case 'f':
-			skew_right_func();
+			skew_up_func();
 			break;
 		case 's':
 			saveImage();
