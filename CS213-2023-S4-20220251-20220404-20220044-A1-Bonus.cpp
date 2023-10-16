@@ -26,7 +26,11 @@ void show_menu();
 bool check_file_name(string file_name);
 
 /* filters 1, 4, 7, a and d */
-void crop_func_rgb()
+void black_and_white_func_rgb();
+void flip_func_rgb();
+void detect_func_rgb();
+void mirror_func_rgb();
+void crop_func_rgb();
 
 /* filters 2, 5, 8, b and e */
 void invert_func_rgb();
@@ -70,6 +74,7 @@ int main(void)
 		switch (selection)
 		{
 		case '1':
+			black_and_white_func_rgb();
 			break;
 		case '2':
 			invert_func_rgb();
@@ -78,6 +83,7 @@ int main(void)
 			merge_func_rgb();
 			break;
 		case '4':
+			flip_func_rgb();
 			break;
 		case '5':
 			darken_lighten_func_rgb();
@@ -86,6 +92,7 @@ int main(void)
 			rotate_func_rgb();
 			break;
 		case '7':
+			detect_func_rgb();
 			break;
 		case '8':
 			enlarge_func_rgb();
@@ -94,6 +101,7 @@ int main(void)
 			shrink_func_rgb();
 			break;
 		case 'a':
+			mirror_func_rgb();
 			break;
 		case 'b':
 			shuffle_func_rgb();
@@ -102,7 +110,7 @@ int main(void)
 			blur_func_rgb();
 			break;
 		case 'd':
-		crop_func_rgb();
+			crop_func_rgb();
 			break;
 		case 'e':
 			skew_right_func_rgb();
@@ -206,6 +214,40 @@ bool check_file_name(string file_name)
 
 //==================================================================================================================================//
 
+void black_and_white_func_rgb()
+{
+	int avg;
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			avg = 0;
+			for (int k = 0; k < RGB; k++)
+			{
+				avg += image[i][j][k];
+			}
+			avg /= 3;
+			for (int k = 0; k < RGB; k++)
+			{
+				image[i][j][k] = avg;
+			}
+		}
+	}
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			for (int k = 0; k < RGB; k++)
+			{
+				if (image[i][j][k] > 127)
+					image[i][j][k] = 255;
+				else
+					image[i][j][k] = 0;
+			}
+		}
+	}
+}
+
 void invert_func_rgb()
 {
 	for (int i = 0; i < SIZE; i++)
@@ -238,6 +280,32 @@ void merge_func_rgb()
 			for (int l = 0; l < RGB; l++)
 				image[i][j][l] = (image[i][j][l] + image_2[i][j][l]) / 2;
 		}
+	}
+}
+void flip_func_rgb()
+{
+	cout << "Flip (h)orizontally or (v)ertically?\n";
+	char type;
+	cin >> type;
+	if (type == 'h')
+		for (int i = 0; i < SIZE; i++)
+			for (int j = 0; j < SIZE / 2; j++)
+				for (int k = 0; k < RGB; k++)
+				{
+					int t = image[i][j][k];
+					image[i][j][k] = image[i][255 - j][k];
+					image[i][255 - j][k] = t;
+				}
+	else if (type == 'v')
+	{
+		for (int i = 0; i < SIZE / 2; i++)
+			for (int j = 0; j < SIZE; j++)
+				for (int k = 0; k < RGB; k++)
+				{
+					int t = image[i][j][k];
+					image[i][j][k] = image[255 - i][j][k];
+					image[255 - i][j][k] = t;
+				}
 	}
 }
 
@@ -325,28 +393,26 @@ void darken_lighten_func_rgb()
 	}
 }
 
-void detecte_func_rgb()
+void detect_func_rgb()
 {
-
-    for (int i = 0; i < SIZE; i++)
-
-        for (int j = 0; j < SIZE; j++)
-
-            for (int k = 0; k < RGB; k++)
-            {
-
-                if (abs(image[i][j][k] - image[i + 1][j][k]) > 35 || abs(image[i][j][k] - image[i][j + 1][k]) > 35)
-                {
-                    image[i][j][k] = 0;
-                }
-
-                else
-                {
-                    image[i][j][k] = 255;
-                }
-            }
+	for (int i = 0; i < SIZE; i++)
+		for (int j = 0; j < SIZE; j++)
+		{
+			bool color_check = false;
+			for (int k = 0; k < RGB; k++)
+			{
+				if (abs(image[i][j][k] - image[i + 1][j][k]) > 35 || abs(image[i][j][k] - image[i][j + 1][k]) > 35)
+					color_check = true;
+			}
+			for (int k = 0; k < RGB; k++)
+			{
+				if (!color_check) 
+				{
+					image[i][j][k] = 255;
+				}
+			}
+		}
 }
-
 
 void enlarge_func_rgb()
 {
@@ -549,6 +615,44 @@ void shrink_func_rgb()
 	}
 }
 
+void mirror_func_rgb()
+{
+	cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?\n";
+	char ch;
+	cin >> ch;
+	if (ch == 'l')
+		for (int i = 0; i < SIZE; i++)
+			for (int j = 0; j < SIZE / 2; j++)
+				for (int k = 0; k < RGB; k++)
+				{
+					image[i][j][k] = image[i][255 - j][k];
+				}
+
+	else if (ch == 'r')
+		for (int i = 0; i < SIZE; i++)
+			for (int j = 0; j < SIZE / 2; j++)
+				for (int k = 0; k < RGB; k++)
+				{
+					image[i][255 - j][k] = image[i][j][k];
+				}
+
+	else if (ch == 'u')
+		for (int i = 0; i < SIZE / 2; i++)
+			for (int j = 0; j < SIZE; j++)
+				for (int k = 0; k < RGB; k++)
+				{
+					image[i][j][k] = image[255 - i][j][k];
+				}
+
+	else if (ch == 'd')
+		for (int i = 0; i < SIZE / 2; i++)
+			for (int j = 0; j < SIZE; j++)
+				for (int k = 0; k < RGB; k++)
+				{
+					image[255 - i][j][k] = image[i][j][k];
+				}
+}
+
 void shuffle_func_rgb()
 {
 	unsigned char shuffledImage[SIZE][SIZE][RGB];
@@ -645,42 +749,31 @@ void blur_func_rgb()
 	}
 }
 
-void crop_func_rgb() 
-{   unsigned char cropimage[SIZE][SIZE][RGB];
+void crop_func_rgb()
+{
+	unsigned char cropimage[SIZE][SIZE][RGB];
 
-  for (int i = 0; i < SIZE; i++) 
-    for (int j = 0; j< SIZE; j++)  
-    for (int k = 0; k< RGB; k++) 
+	for (int i = 0; i < SIZE; i++)
+		for (int j = 0; j < SIZE; j++)
+			for (int k = 0; k < RGB; k++)
+				cropimage[i][j][k] = 255;
 
-      cropimage[i][j][k] = 255; 
-      int x,y,l,w;
-      cout<<"entre starting position in x,y: ";
-      cin>>x>>y;
-      cout<<"entre lenghth and width: ";
-      cin>>l>>w;
-      for (int i = x; i < x+l ; i++)
-      {
-        for (int j = y; j < y+w; j++)
-            for (int K = 0; K < RGB; K++)
-
-      {
-        cropimage[i][j][K] = image[i][j][K];
-      }
-      }
-      for (int i = 0; i < SIZE; i++)
-      {
-        for (int j = 0; j < SIZE; j++)
-         for (int K = 0; K < RGB; K++)
-
-
-      {
-           image[i][j][K]= cropimage[i][j][K];
-      }
-        
-    }
-        
+	int x, y, l, w;
+	cout << "Please enter x y l w: ";
+	cin >> x >> y >> l >> w;
+	for (int i = x; i < x + l; i++)
+		for (int j = y; j < y + w; j++)
+			for (int k = 0; k < RGB; k++)
+			{
+				cropimage[j][i][k] = image[j][i][k];
+			}
+	for (int i = 0; i < SIZE; i++)
+		for (int j = 0; j < SIZE; j++)
+			for (int k = 0; k < RGB; k++)
+			{
+				image[i][j][k] = cropimage[i][j][k];
+			}
 }
-     
 
 void skew_right_func_rgb()
 {
@@ -708,11 +801,6 @@ void skew_right_func_rgb()
 		{
 			for (int k = 0; k < RGB; k++)
 			{
-				// average = 0;
-				// for (int x = 0; x < int(1/scale); x++)
-				//   average += image[i][int(j/scale)+x];
-				// shrinkedImage[i][j] = average/;
-
 				shrinkedRGBImage[i][j][k] = image[i][int(j / scale)][k];
 			}
 		}
