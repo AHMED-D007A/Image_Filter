@@ -12,15 +12,11 @@
 #include <bits/stdc++.h>
 #include "bmplib.cpp"
 
-
 using namespace std;
 
 //==================================================================================================================================//
 
 unsigned char image[SIZE][SIZE];
-#include "CS213-2023-20220044-A1.cpp"
-#include "CS213-2023-20220404-A1.cpp"
-#include "CS213-2023-20220251-A1.cpp"
 
 /* functions declaration */
 void loadImage(string file_name);
@@ -28,6 +24,17 @@ void saveImage();
 void Ahlan();
 void show_menu();
 bool check_file_name(string file_name);
+
+// filter 1 and 4.
+void black_and_white_func();
+void flip_func();
+
+// filter 2 and 5.
+void invert_func();
+void rotate_func();
+// filter 3 and 6.
+void merge_func();
+void darken_lighten_func();
 
 //==================================================================================================================================//
 
@@ -75,31 +82,31 @@ int main(void)
 			rotate_func();
 			break;
 		case '7':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case '8':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case '9':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case 'a':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case 'b':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case 'c':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case 'd':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case 'e':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case 'f':
-			/* code */
+			cout << "Not Ready Yet!\n";
 			break;
 		case 's':
 			saveImage();
@@ -117,11 +124,18 @@ int main(void)
 
 //==================================================================================================================================//
 
+/**
+ * loadImage - a func that takes the image name that want to be opened.
+ * @file_name: the name of the file to be opened.
+ */
 void loadImage(string file_name)
 {
 	readGSBMP(file_name.c_str(), image);
 }
 
+/**
+ * saveImage - save the modifications in a new image file with a given name.
+ */
 void saveImage()
 {
 	char imageFileName[100];
@@ -146,27 +160,27 @@ void Ahlan()
 
 /**
  * show_menu - display a list of choices to choose a filter to apply.
-*/
+ */
 void show_menu()
 {
-cout << "Please select a filter to apply or 0 to exit:"
-	 << "\n1-Black & White Filter"
-	 << "\n2-Invert Filter"
-	 << "\n3-Merge Filter"
-	 << "\n4-Flip Image"
-	 << "\n5-Darken and Lighten Image"
-	 << "\n6-Rotate Image"
-	 << "\n7-Detect Image Edges"
-	 << "\n8-Enlarge Image"
-	 << "\n9-Shrink Image"
-	 << "\na-Mirror 1/2 Image"
-	 << "\nb-Shuffle Image"
-	 << "\nc-Blur Image"
-	 << "\nd-Crop Image"
-	 << "\ne-Skew Image Right"
-	 << "\nf-Skew Image Up"
-	 << "\ns-Save the image to a file"
-	 << "\n0-Exit\n";
+	cout << "Please select a filter to apply or 0 to exit:"
+		 << "\n1-Black & White Filter"
+		 << "\n2-Invert Filter"
+		 << "\n3-Merge Filter"
+		 << "\n4-Flip Image"
+		 << "\n5-Darken and Lighten Image"
+		 << "\n6-Rotate Image"
+		 << "\n7-Detect Image Edges"
+		 << "\n8-Enlarge Image"
+		 << "\n9-Shrink Image"
+		 << "\na-Mirror 1/2 Image"
+		 << "\nb-Shuffle Image"
+		 << "\nc-Blur Image"
+		 << "\nd-Crop Image"
+		 << "\ne-Skew Image Right"
+		 << "\nf-Skew Image Up"
+		 << "\ns-Save the image to a file"
+		 << "\n0-Exit\n";
 }
 
 /**
@@ -184,6 +198,174 @@ bool check_file_name(string file_name)
 		return (0);
 	}
 
-	cout << "Cannot open file: " << file_name <<endl;
+	cout << "Cannot open file: " << file_name << endl;
 	return (1);
+}
+
+//==================================================================================================================================//
+
+/**
+ * black_and_white_func - a function that return the given image in black and white only.
+ */
+void black_and_white_func()
+{
+	/*if the pixel value is bigger than 127 it makes it 255(white) otherwise makes it 0(black)*/
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			if (image[i][j] > 127)
+				image[i][j] = 255;
+			else
+				image[i][j] = 0;
+		}
+	}
+}
+
+/**
+ * flip_func - a function that return the given image flipped Horizontally or Vertically by your choice.
+ */
+void flip_func()
+{
+	cout << "Flip (h)orizontally or (v)ertically?\n";
+	char type;
+	cin >> type;
+	if (type == 'h')
+		/*it swaps two pixels in same row which result in horizontal flip*/
+		for (int i = 0; i < SIZE; i++)
+			for (int j = 0; j < SIZE / 2; j++)
+			{
+				int t = image[i][j];
+				image[i][j] = image[i][255 - j];
+				image[i][255 - j] = t;
+			}
+	else if (type == 'v')
+	{
+		/*it swaps two pixels in same column which result in vertical flip*/
+		for (int i = 0; i < SIZE / 2; i++)
+			for (int j = 0; j < SIZE; j++)
+			{
+				int t = image[i][j];
+				image[i][j] = image[255 - i][j];
+				image[255 - i][j] = t;
+			}
+	}
+}
+
+/**
+ * invert_func - invert all pixels values of the image.
+ */
+void invert_func()
+{
+	/* Inverts the pixel by getting the complement of the pixel value */
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			image[i][j] = 255 - image[i][j];
+		}
+	}
+}
+
+/**
+ * rotate_func - rotate the given image by 90, 180 and 270 by a given input.
+ */
+void rotate_func()
+{
+	unsigned char rotatedImage[SIZE][SIZE];
+	int r;
+	cout << "Rotate (90), (180) or (270) degrees?\n";
+	cin >> r;
+	switch (r)
+	{
+	case 90:
+		/*it takes the i-th column from bottom to top and transforms it to the i-th row from left to right.*/
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				rotatedImage[i][j] = image[255 - j][i];
+			}
+		}
+		break;
+	case 180:
+		/*it takes the n(number of rows) - i-th row from right to left and transforms it to the i-th row from left to right.*/
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				rotatedImage[i][j] = image[255 - i][255 - j];
+			}
+		}
+		break;
+	case 270:
+		/*it takes n(number of columns) - i-th column from top to bottom and transforms it to the i-th row from left to right.*/
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				rotatedImage[i][j] = image[j][255 - i];
+			}
+		}
+		break;
+	}
+	/*saves it to the given image.*/
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			image[i][j] = rotatedImage[i][j];
+		}
+	}
+}
+
+/**
+ * merge_func - it merges two given images.
+ */
+void merge_func()
+{
+	/*it saves the average of the same indexed two pixels of the two given images to the new image.*/
+	string file_name;
+	unsigned char image_2[SIZE][SIZE];
+
+	cout << "Please enter name of image file to merge with: ";
+	cin >> file_name;
+	file_name += ".bmp";
+
+	readGSBMP(file_name.c_str(), image_2);
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			image[i][j] = (image[i][j] + image_2[i][j]) / 2;
+		}
+	}
+}
+
+/**
+ * darken_lighten_func - it changes the level of brightness of the image by darkening or lightening it.
+ */
+void darken_lighten_func()
+{
+	char chara;
+
+	cout << "Do you want to (d)arken or (l)ighten?\n";
+	cin >> chara;
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			/*it multiply every pixel by 1.5*/
+			if (chara == 'l')
+				if (image[i][j] + (image[i][j] / 2) > 255)
+					image[i][j] = 255;
+				else
+					image[i][j] = image[i][j] + (image[i][j] / 2);
+			/*it multiply every pixel by .5*/
+			else if (chara == 'd')
+				image[i][j] = image[i][j] - (image[i][j] / 2);
+		}
+	}
 }
